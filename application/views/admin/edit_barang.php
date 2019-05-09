@@ -1,137 +1,83 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="A fully featured admin theme which can be used to build CRM, CMS, etc.">
-    <meta name="author" content="Coderthemes">
-
-    <link rel="shortcut icon" href="<?php echo base_url('assets/blue/images/favicon_1.ico');?>">
-
-    <title>Moltran - Responsive Admin Dashboard Template</title>
-
-    <!-- Base Css Files -->
-    <link href="<?php echo base_url('assets/blue/css/bootstrap.min.css');?>" rel="stylesheet" />
-
-    <!-- Font Icons -->
-    <link href="<?php echo base_url('assets/blue/assets/font-awesome/css/font-awesome.min.css');?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/blue/assets/ionicon/css/ionicons.min.css');?>" rel="stylesheet" />
-    <link href="<?php echo base_url('assets/blue/css/material-design-iconic-font.min.css');?>" rel="stylesheet">
-
-    <!-- animate css -->
-    <link href="<?php echo base_url('assets/blue/css/animate.css');?>" rel="stylesheet" />
-
-    <!-- Waves-effect -->
-    <link href="<?php echo base_url('assets/blue/css/waves-effect.css');?>" rel="stylesheet">
-
-    <!--bootstrap-wysihtml5-->
-    <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/blue/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css');?>" />
-    <link href="<?php echo base_url('assets/blue/assets/summernote/summernote.css');?>" rel="stylesheet" />
-
-    <!-- Custom Files -->
-    <link href="<?php echo base_url('assets/blue/css/helper.css');?>" rel="stylesheet" type="text/css" />
-    <link href="<?php echo base_url('assets/blue/css/style.css');?>" rel="stylesheet" type="text/css" />
-
-    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
-        <!--[if lt IE 9]>
-        <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-        <script src="https://oss.maxcdn.com/libs/respond.js/1.3.0/respond.min.js"></script>
-        <![endif]-->
-
-        <script src="<?php echo base_url('assets/blue/js/modernizr.min.js');?>"></script>
+<!-- Top Bar Start -->
+<?php $this->load->view('admin/top_menu');?>
+<!-- Top Bar End -->
 
 
-        
-    </head>
+<!-- ========== Left Sidebar Start ========== -->
+
+<?php $this->load->view('admin/sidebar');?>
+<!-- Left Sidebar End --> 
 
 
 
-    <body class="fixed-left">
-        
-        <!-- Begin page -->
-        <div id="wrapper">
-            
-            <!-- Top Bar Start -->
-            <?php $this->load->view('admin/top_menu');?>
-            <!-- Top Bar End -->
-
-
-            <!-- ========== Left Sidebar Start ========== -->
-
-            <?php $this->load->view('admin/sidebar');?>
-            <!-- Left Sidebar End --> 
-
-
-
-            <!-- ============================================================== -->
-            <!-- Start right Content here -->
-            <!-- ============================================================== -->    
-            <div class="content-page">
-                <!-- Start content -->
-                <div class="content">
-                    <div class="container">
-                     <div class="col-md-12">
-                        <div class="panel panel-default">
-                            <div class="panel-heading"><h3 class="panel-title">Horizontal form</h3></div>
-                            <div class="panel-body">
-                              <?php echo form_open_multipart('admin/proseseditproduk',['class'=>'form-horizontal','role'=>'form']);?>
-                              <div class="form-group">
-                                <label class="col-sm-3 control-label">Kategori</label>
-                                <div class="col-sm-9">
-                                  <select name="kategori" class="select2" data-placeholder="Pilih Produk ... ">
-                                      <?php foreach ($kategori as $data): ?>
-                                        <option value="<?= $data->id_kategori ?>"
-                                            <?php if($data->id_kategori == $produk->kategori) echo "selected"; ?>><?= $data->nama_kategori ?></option>
-                                        <?php endforeach; ?>
-                                    </select>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label class="col-sm-3 control-label">Brand</label>
-                                <div class="col-sm-9">
-                                  <input type="text" name="nama_produk" value="<?php echo $produk->nama_produk;?>" class="form-control" placeholder="Brand">
-                              </div>
-                          </div>
-                          <div class="form-group">
-                            <label class="col-sm-3 control-label">Model</label>
-                            <div class="col-sm-9">
-                              <input type="text" name="ukuran" value="<?php echo $produk->ukuran;?>" class="form-control" placeholder="Model">
-                          </div>
-                      </div>
-                      
-                      <div class="form-group">
-                        <label class="col-sm-3 control-label">Harga</label>
-                        <div class="col-sm-9">
-                          <input type="text" name="harga" value="<?php echo $produk->harga;?>" class="form-control" placeholder="Harga, Mis : 750000">
-                      </div>
-                  </div>
+<!-- ============================================================== -->
+<!-- Start right Content here -->
+<!-- ============================================================== -->    
+<div class="content-page">
+    <!-- Start content -->
+    <div class="content">
+        <div class="container">
+           <div class="col-md-12">
+            <div class="panel panel-default">
+                <div class="panel-heading"><h3 class="panel-title">Horizontal form</h3></div>
+                <div class="panel-body">
+                  <?php echo form_open_multipart('admin/proseseditproduk',['class'=>'form-horizontal','role'=>'form']);?>
                   <div class="form-group">
-                    <label class="col-sm-3 control-label">Gambar</label>
+                    <label class="col-sm-3 control-label">Kategori</label>
                     <div class="col-sm-9">
-                      <input type="file" class="form-control" name="userfile" />
-                  </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-12">
-                    <div class="panel panel-default">
-                        <div class="panel-heading"><h3 class="panel-title">Masukkan keterangan produk</h3></div>
-                        <div class="panel-body">
-                            <textarea name="keterangan" class="wysihtml5 form-control" rows="9"><?php echo $produk->keterangan;?></textarea>
-                        </div>
+                      <select name="kategori" class="select2" data-placeholder="Pilih Produk ... ">
+                          <?php foreach ($kategori as $data): ?>
+                            <option value="<?= $data->id_kategori ?>"
+                                <?php if($data->id_kategori == $produk->kategori) echo "selected"; ?>><?= $data->nama_kategori ?></option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
-            </div> <!-- End row -->
-
-            <input type="hidden" name="id" value="<?php echo $produk->id;?>">
-            <div class="form-group m-b-0">
-                <div class="col-sm-offset-3 col-sm-9">
-                  <button type="submit" class="btn btn-info waves-effect waves-light">Edit</button>
+                <div class="form-group">
+                    <label class="col-sm-3 control-label">Brand</label>
+                    <div class="col-sm-9">
+                      <input type="text" name="nama_produk" value="<?php echo $produk->nama_produk;?>" class="form-control" placeholder="Brand">
+                  </div>
+              </div>
+              <div class="form-group">
+                <label class="col-sm-3 control-label">Model</label>
+                <div class="col-sm-9">
+                  <input type="text" name="ukuran" value="<?php echo $produk->ukuran;?>" class="form-control" placeholder="Model">
               </div>
           </div>
-          <?php echo form_close();?>
-      </div> <!-- panel-body -->
-  </div> <!-- panel -->
+          
+          <div class="form-group">
+            <label class="col-sm-3 control-label">Harga</label>
+            <div class="col-sm-9">
+              <input type="text" name="harga" value="<?php echo $produk->harga;?>" class="form-control" placeholder="Harga, Mis : 750000">
+          </div>
+      </div>
+      <div class="form-group">
+        <label class="col-sm-3 control-label">Gambar</label>
+        <div class="col-sm-9">
+          <input type="file" class="form-control" name="userfile" />
+      </div>
+  </div>
+  <div class="row">
+    <div class="col-sm-12">
+        <div class="panel panel-default">
+            <div class="panel-heading"><h3 class="panel-title">Masukkan keterangan produk</h3></div>
+            <div class="panel-body">
+                <textarea name="keterangan" class="wysihtml5 form-control" rows="9"><?php echo $produk->keterangan;?></textarea>
+            </div>
+        </div>
+    </div>
+</div> <!-- End row -->
+
+<input type="hidden" name="id" value="<?php echo $produk->id;?>">
+<div class="form-group m-b-0">
+    <div class="col-sm-offset-3 col-sm-9">
+      <button type="submit" class="btn btn-info waves-effect waves-light">Edit</button>
+  </div>
+</div>
+<?php echo form_close();?>
+</div> <!-- panel-body -->
+</div> <!-- panel -->
 </div> <!-- col -->
 </div>
 </div>

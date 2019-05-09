@@ -25,13 +25,14 @@ class Welcome extends CI_Controller {
 	function add_to_cart($id)
 	{
 		$produk = $this->produk_model->select_by_id($id);
-		$nama = $produk->brand.' '.$produk->model;
+
+		$nama = $produk->nama_produk;
 		$data = array(
-						'id' => $produk->id,
-						'qty' => 1,
-						'price' => $produk->harga,
-						'name' => $nama
-		);
+			'id' => $produk->id,
+			'qty' => 1,
+			'price' => $produk->harga,
+			'name' => $nama
+			);
 		
 		$this->cart->insert($data);
 		redirect(base_url());
@@ -40,13 +41,13 @@ class Welcome extends CI_Controller {
 	function add_to_cartdetail($id)
 	{
 		$produk = $this->produk_model->select_by_id($id);
-		$nama = $produk->brand.' '.$produk->model;
+		$nama = $produk->nama_produk;
 		$data = array(
-						'id' => $produk->id,
-						'qty' => 1,
-						'price' => $produk->harga,
-						'name' => $nama
-		);
+			'id' => $produk->id,
+			'qty' => 1,
+			'price' => $produk->harga,
+			'name' => $nama
+			);
 		
 		$this->cart->insert($data);
 		redirect('welcome/detailproduk/'.$id);
@@ -110,7 +111,7 @@ class Welcome extends CI_Controller {
 			
 			$data['invoice_id'] = $this->input->post('invoice_id',true);
 			$data['gambar'] = $gambar['file_name'];
-		
+
 			$this->produk_model->insert_konfirmasi($data);
 			$this->load->view('confirm_success');
 		}

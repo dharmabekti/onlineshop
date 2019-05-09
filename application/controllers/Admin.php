@@ -134,12 +134,19 @@ class Admin extends CI_Controller
 		$data['konfirmasi'] = $this->produk_model->detail_konfirmasi($invoice_id);
 		$this->load->view('admin/detail_konfirmasi',$data);
 	}
-	
-	function logout()
+
+	function verifikasibayar($invoice_id)
 	{
-		$this->session->sess_destroy();
-		redirect(base_url());
+		$data['status'] = "PAID";
+		$this->produk_model->editinvoices($invoice_id, $data);
+		redirect('admin/konfirmasi');
 	}
+	
+	// function logout()
+	// {
+	// 	$this->session->sess_destroy();
+	// 	redirect(base_url());
+	// }
 	
 	function download($nama)
 	{

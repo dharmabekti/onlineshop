@@ -47,7 +47,8 @@
 										<h5><?php echo $produk->nama_produk;?><br><?php echo $produk->ukuran;?></h5>
 
 
-										<h4 style="text-align:center"><a class="btn" href="<?php echo site_url('welcome/detailproduk/'.$produk->id);?>"> <i class="icon-zoom-in"></i></a> <a class="btn" href="<?php echo site_url('welcome/add_to_cart/'.$produk->id);?>">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">Rp. <?php echo number_format($produk->harga,0,',','.');?></a></h4>
+										<h4 style="text-align:center"><a class="btn" href="<?php echo site_url('welcome/detailproduk/'.$produk->id);?>"> <i class="icon-zoom-in"></i></a>
+										<a class="btn" href="<?php echo site_url('welcome/add_to_cart/'.$produk->id);?>">Add to <i class="icon-shopping-cart"></i></a> <a class="btn btn-primary" href="#">Rp. <?php echo number_format($produk->harga,0,',','.');?></a></h4>
 									</div>
 								</div>
 							</li>
@@ -58,19 +59,7 @@
 		</div>
 	</div>
 	<!-- Footer ================================================================== -->
-	<div  id="footerSection">
-		<div class="container">
-			<div class="row">
-				<div id="socialMedia" class="span3 pull-left">
-					<h5>SOCIAL MEDIA </h5>
-					<a href="#"><img width="60" height="60" src="<?php echo base_url('assets/bootshop/themes/images/facebook.png');?>" title="facebook" alt="facebook"/></a>
-					<a href="#"><img width="60" height="60" src="<?php echo base_url('assets/bootshop/themes/images/twitter.png');?>" title="twitter" alt="twitter"/></a>
-					<a href="#"><img width="60" height="60" src="<?php echo base_url('assets/bootshop/themes/images/youtube.png');?>" title="youtube" alt="youtube"/></a>
-				</div> 
-			</div>
-			<p class="pull-right">&copy; Neo Project 2019</p>
-		</div><!-- Container End -->
-	</div>
+	<?php $this->load->view('footer');?>
 	<!-- Placed at the end of the document so the pages load faster ============================================= -->
 	<script src="<?php echo base_url('assets/bootshop/themes/js/jquery.js');?>" type="text/javascript"></script>
 	<script src="<?php echo base_url('assets/bootshop/themes/js/bootstrap.min.js');?>" type="text/javascript"></script>

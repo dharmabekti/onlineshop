@@ -23,12 +23,12 @@
                 <li>
                     <a href="<?php echo site_url('admin/daftarproduk');?>" class="waves-effect"><i class="md md-home"></i><span> Produk </span></a>
                 </li>
-                <!-- <li>
+                <li>
                     <a href="<?php echo site_url('admin/invoices');?>" class="waves-effect"><i class="md md-home"></i><span> Invoices </span></a>
                 </li>
                 <li>
                     <a href="<?php echo site_url('admin/konfirmasi');?>" class="waves-effect"><i class="md md-home"></i><span> Konfirmasi </span></a>
-                </li> -->
+                </li>
                 
 
             </ul>

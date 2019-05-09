@@ -241,20 +241,18 @@ CREATE TABLE `invoices` (
   `id` int(10) NOT NULL AUTO_INCREMENT,
   `nama` varchar(255) NOT NULL,
   `nope` varchar(14) NOT NULL,
+  `email` varchar(100) NOT NULL,
   `alamat` text NOT NULL,
   `date` datetime NOT NULL,
   `due_date` datetime NOT NULL,
-  `status` enum('paid','unpaid','canceled','expired') NOT NULL,
+  `status` enum('PAID','UNPAID','CENCELED','EXPIRED') NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
 
 /*Data for the table `invoices` */
 
-insert  into `invoices`(`id`,`nama`,`nope`,`alamat`,`date`,`due_date`,`status`) values 
-(9,'Fadly','081213070702','pedurenan bekasi','2016-11-08 16:22:07','2016-11-09 16:22:07','unpaid'),
-(10,'jisung','081213070702','dsfdsfsd','2016-11-09 01:29:35','2016-11-10 01:29:35','unpaid'),
-(11,'ayu','081213070702','PNJ','2016-11-09 11:20:23','2016-11-10 11:20:23','unpaid'),
-(12,'','','','2016-11-22 14:11:21','2016-11-23 14:11:21','unpaid');
+insert  into `invoices`(`id`,`nama`,`nope`,`email`,`alamat`,`date`,`due_date`,`status`) values 
+(1,'Bekti','21212','dharmabekti@gmail.com','Jrakah Village 002/004, Bayan','2019-05-09 17:05:30','2019-05-10 17:05:30','PAID');
 
 /*Table structure for table `kategori_produk` */
 
@@ -288,7 +286,8 @@ CREATE TABLE `konfirmasi` (
 /*Data for the table `konfirmasi` */
 
 insert  into `konfirmasi`(`id`,`invoice_id`,`tanggal`,`gambar`) values 
-(2,9,'2016-11-12 09:43:41','WhatsApp_Image_2016-11-01_at_05_03_431.jpeg');
+(1,1,'2019-05-09 22:28:25','WhatsApp_Image_2019-04-26_at_10_23_26.jpeg'),
+(2,1,'2019-05-09 22:34:14','34.jpg');
 
 /*Table structure for table `orders` */
 
@@ -303,18 +302,14 @@ CREATE TABLE `orders` (
   `price` int(9) NOT NULL,
   `options` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=23 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=latin1;
 
 /*Data for the table `orders` */
 
 insert  into `orders`(`id`,`invoice_id`,`product_id`,`product_name`,`qty`,`price`,`options`) values 
-(16,9,1,'Samsung Tab S2',2,6000000,''),
-(17,9,2,'Nikon D3300',1,5199999,''),
-(18,10,1,'Samsung Tab S2',1,6000000,''),
-(19,11,1,'Samsung Tab S2',2,6000000,''),
-(20,11,2,'Nikon D3300',1,5199999,''),
-(21,12,1,'Samsung Tab S2',1,6000000,''),
-(22,12,2,'Nikon D3300',2,5199999,'');
+(1,1,1,'Samsung',2,6000000,''),
+(2,1,2,'Nikon',1,5199999,''),
+(3,1,3,'Lenovo',1,1600000,'');
 
 /*Table structure for table `produk` */
 
@@ -336,7 +331,7 @@ CREATE TABLE `produk` (
 
 insert  into `produk`(`id`,`kategori`,`nama_produk`,`ukuran`,`keterangan`,`harga`,`gambar`,`ishapus`) values 
 (1,2,'Samsung','Layar 8.0','<h5>Features Samsung Tab S2</h5>14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>OND363338<h4>Editorial Reviews</h4><h5>Manufacturer\'s Description</h5>With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0\" LCD screen and 720p HD (30fps) movie capture.<h5>Electric powered Fujinon 18x zoom lens</h5>The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you\'re at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.<h5>Impressive panoramas</h5>With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It\'s so easy and the results are impressive.<h5>Sharp, clear shots</h5>Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3\", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm\'s Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.',6000000,'samsungs22.jpg',0),
-(2,1,'Nikon','3.0? 921k-Dot LCD Monitor','<h5>Features Nikon</h5>14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>OND363338<h4>Editorial Reviews</h4><h5>Manufacturer\'s Description</h5>With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0\" LCD screen and 720p HD (30fps) movie capture.<h5>Electric powered Fujinon 18x zoom lens</h5>The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you\'re at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.<h5>Impressive panoramas</h5>With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It\'s so easy and the results are impressive.<h5>Sharp, clear shots</h5>Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3\", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm\'s Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.',5199999,'Nikon-D3300-700x5255.png',0),
+(2,1,'Nikon','3.0 921k-Dot LCD Monitor','<h5>Features Nikon</h5>14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>OND363338<h4>Editorial Reviews</h4><h5>Manufacturer\'s Description</h5>With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0\" LCD screen and 720p HD (30fps) movie capture.<h5>Electric powered Fujinon 18x zoom lens</h5>The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you\'re at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.<h5>Impressive panoramas</h5>With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It\'s so easy and the results are impressive.<h5>Sharp, clear shots</h5>Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3\", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm\'s Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.',5199999,'Nikon-D3300-700x5255.png',0),
 (3,2,'Lenovo','141 x 70 x 8.2 mm (5.55 x 2.76 x 0.32 in) ','<h5>Features Lenovo A6000</h5>14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>OND363338<h4>Editorial Reviews</h4><h5>Manufacturer\'s Description</h5>With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0\" LCD screen and 720p HD (30fps) movie capture.<h5>Electric powered Fujinon 18x zoom lens</h5>The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you\'re at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.<h5>Impressive panoramas</h5>With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It\'s so easy and the results are impressive.<h5>Sharp, clear shots</h5>Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3\", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm\'s Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.',1600000,'samsungs23.jpg',0),
 (4,1,'Asus','16x16','<h5>Features Asus Zenfone 2</h5>14 Megapixels. 18.0 x Optical Zoom. 3.0-inch LCD Screen. Full HD photos and 1280 x 720p HD movie capture. ISO sensitivity ISO6400 at reduced resolution. Tracking Auto Focus. Motion Panorama Mode. Face Detection technology with Blink detection and Smile and shoot mode. 4 x AA batteries not included. WxDxH 110.2 ×81.4x73.4mm. Weight 0.341kg (excluding battery and memory card). Weight 0.437kg (including battery and memory card).<br>OND363338<h4>Editorial Reviews</h4><h5>Manufacturer\'s Description</h5>With a generous 18x Fujinon optical zoom lens, the S2950 really packs a punch, especially when matched with its 14 megapixel sensor, large 3.0\" LCD screen and 720p HD (30fps) movie capture.<h5>Electric powered Fujinon 18x zoom lens</h5>The S2950 sports an impressive 28mm – 504mm* high precision Fujinon optical zoom lens. Simple to operate with an electric powered zoom lever, the huge zoom range means that you can capture all the detail, even when you\'re at a considerable distance away. You can even operate the zoom during video shooting. Unlike a bulky D-SLR, bridge cameras allow you great versatility of zoom, without the hassle of carrying a bag of lenses.<h5>Impressive panoramas</h5>With its easy to use Panoramic shooting mode you can get creative on the S2950, however basic your skills, and rest assured that you will not risk shooting uneven landscapes or shaky horizons. The camera enables you to take three successive shots with a helpful tool which automatically releases the shutter once the images are fully aligned to seamlessly stitch the shots together in-camera. It\'s so easy and the results are impressive.<h5>Sharp, clear shots</h5>Even at the longest zoom settings or in the most challenging of lighting conditions, the S2950 is able to produce crisp, clean results. With its mechanically stabilised 1/2 3\", 14 megapixel CCD sensor, and high ISO sensitivity settings, Fujifilm\'s Dual Image Stabilisation technology combines to reduce the blurring effects of both hand-shake and subject movement to provide superb pictures.',4000000,'Nikon-D3300-700x5256.png',0),
 (6,2,'Nyamnyung','23x56','Ini adalah hp nyamyung...<br>Murah meriah hp nya...<br><br><br>',4000000,'samsungs24.jpg',0),
