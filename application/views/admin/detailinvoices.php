@@ -39,6 +39,10 @@
                                         <td>Alamat Lengkap Pembeli</td>
                                         <td><?= $invoices[0]->alamat; ?></td>
                                     </tr>
+                                    <tr>
+                                        <td>Kurir</td>
+                                        <td><?= $invoices[0]->kurir; ?></td>
+                                    </tr>
                                 </table>
                                 <br>
                             </div>

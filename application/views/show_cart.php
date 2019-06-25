@@ -42,22 +42,31 @@
 							<thead>
 								<tr>
 									<th>Nama</th>
-									<th>Quantity</th>
-									<th>Price</th>
+									<th>Jumlah</th>
+									<th>Harga Satuan</th>
+									<th>Berat</th>
 									<th>Total</th>
 								</tr>
 							</thead>
 							<tbody>
-								<?php foreach ($this->cart->contents() as $produk): ?>
+								<?php $berat = 0;
+								foreach ($this->cart->contents() as $produk): ?>
 									<tr>
 										<td><?php echo $produk['name'];?></td>
 										<td><?php echo $produk['qty'];?></td>
 										<td><?php echo number_format($produk['price'],0,',','.');?></td>
+										<td><?php echo $produk['weight'] . " gram";?></td>
 										<td><?php echo number_format($produk['subtotal'],0,',','.');?></td>
 									</tr>
-								<?php endforeach;?>
+									<?php 
+									$berat += $produk['qty'] * $produk['weight'];
+								endforeach;?>
 								<tr>
-									<td colspan="3" style="text-align:right">TOTAL BELANJA</td>
+									<td colspan="4" style="text-align:right">Total Berat</td>
+									<td class="label label-important" style="display:block"> <?php echo $berat . " gram";?></td>
+								</tr>
+								<tr>
+									<td colspan="4" style="text-align:right">TOTAL BELANJA</td>
 									<td class="label label-important" style="display:block"> <?php echo number_format($this->cart->total(),0,',','.');?></td>
 								</tr>
 							</tbody>
@@ -66,7 +75,7 @@
 
 
 						<a href="<?php echo base_url();?>" class="btn btn-sm"><i class="icon-arrow-left"></i> Lanjut Belanja</a>
-						<a href="<?php echo site_url('welcome/email');?>" class="btn btn-sm pull-right">Pembayaran <i class="icon-arrow-right"></i></a>
+						<a href="<?php echo site_url('welcome/email/'.$berat);?>" class="btn btn-sm pull-right">Pembayaran <i class="icon-arrow-right"></i></a>
 
 					</div>
 				</div></div>

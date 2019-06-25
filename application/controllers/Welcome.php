@@ -2,6 +2,7 @@
 defined('BASEPATH') OR exit('No direct script access allowed');
 
 class Welcome extends CI_Controller {
+	private $api_key = "c3b92147328ad31d1e80e8277e7e5aff";
 
 	function __construct()
 	{
@@ -29,10 +30,11 @@ class Welcome extends CI_Controller {
 		$nama = $produk->nama_produk;
 		$data = array(
 			'id' => $produk->id,
+			'name' => $nama,
 			'qty' => 1,
 			'price' => $produk->harga,
-			'name' => $nama
-			);
+			'weight' => $produk->berat
+		);
 		
 		$this->cart->insert($data);
 		redirect(base_url());
@@ -44,10 +46,11 @@ class Welcome extends CI_Controller {
 		$nama = $produk->nama_produk;
 		$data = array(
 			'id' => $produk->id,
+			'name' => $nama,
 			'qty' => 1,
 			'price' => $produk->harga,
-			'name' => $nama
-			);
+			'weight' => $produk->berat
+		);
 		
 		$this->cart->insert($data);
 		redirect('welcome/detailproduk/'.$id);
@@ -66,12 +69,90 @@ class Welcome extends CI_Controller {
 	
 	function email()
 	{
-		$this->load->view('confirm_email');
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.rajaongkir.com/starter/city",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "GET",
+			CURLOPT_HTTPHEADER => array(
+				"key: $this->api_key"
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			$json = json_decode($response);
+			$data['kota'] = $json->rajaongkir->results;
+
+			$this->load->view('confirm_email', $data);
+			// echo '<pre>';
+			// print_r($data->rajaongkir->results);
+			// echo '</pre>';
+		}
 	}
 	
 	function prosestransaksi()
 	{
 		$this->produk_model->process();
+	}
+
+	function reviewtransaksi()
+	{
+		$origin = 419;
+		$destination = $this->input->post('kota',true);
+		$courier = $this->input->post('kurir',true);
+		$weight = $this->input->post('berat',true);
+
+		$curl = curl_init();
+
+		curl_setopt_array($curl, array(
+			CURLOPT_URL => "https://api.rajaongkir.com/starter/cost",
+			CURLOPT_RETURNTRANSFER => true,
+			CURLOPT_ENCODING => "",
+			CURLOPT_MAXREDIRS => 10,
+			CURLOPT_TIMEOUT => 30,
+			CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
+			CURLOPT_CUSTOMREQUEST => "POST",
+			CURLOPT_POSTFIELDS => "origin=$origin&destination=$destination&weight=$weight&courier=$courier",
+			CURLOPT_HTTPHEADER => array(
+				"content-type: application/x-www-form-urlencoded",
+				"key: $this->api_key"
+			),
+		));
+
+		$response = curl_exec($curl);
+		$err = curl_error($curl);
+
+		curl_close($curl);
+
+		if ($err) {
+			echo "cURL Error #:" . $err;
+		} else {
+			$json = json_decode($response);
+			$data['cost'] = $json->rajaongkir->results;
+			echo $json->rajaongkir->results;
+		}
+
+		// $data['pemesan'] = array(
+		// 	'nama' => $this->input->post('nama',true),
+		// 	'nope' => $this->input->post('nope',true),
+		// 	'email' => $this->input->post('email',true),
+		// 	'alamat' => $this->input->post('alamat',true),
+		// 	'kota_tujuan' => $this->input->post('kota',true),
+		// 	'kurir' => $this->input->post('kurir',true),
+		// );
+		// $this->load->view('review_email',$data);
 	}
 	
 	function test()

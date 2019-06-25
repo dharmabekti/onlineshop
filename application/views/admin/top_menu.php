@@ -31,6 +31,8 @@
   <link href="<?php echo base_url('assets/blue/css/helper.css');?>" rel="stylesheet" type="text/css" />
   <link href="<?php echo base_url('assets/blue/css/style.css');?>" rel="stylesheet" type="text/css" />
   <script src="<?php echo base_url('assets/blue/js/modernizr.min.js');?>"></script>
+  <link href="<?php echo base_url('assets/blue/assets/summernote/summernote.css');?>" rel="stylesheet" />
+  <link rel="stylesheet" type="text/css" href="<?php echo base_url('assets/blue/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.css');?>" />
 
   
 </head>

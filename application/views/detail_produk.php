@@ -78,6 +78,7 @@
 										<tr class="techSpecRow"><td class="techSpecTD1">Nama Produk </td><td class="techSpecTD2"><?php echo $produk->nama_produk;?></td></tr>
 										<tr class="techSpecRow"><td class="techSpecTD1">Kategori</td><td class="techSpecTD2"><?php echo $produk->nama_kategori;?></td></tr>
 										<tr class="techSpecRow"><td class="techSpecTD1">Ukuran:</td><td class="techSpecTD2"> <?php echo $produk->ukuran;?></td></tr>
+										<tr class="techSpecRow"><td class="techSpecTD1">Berat:</td><td class="techSpecTD2"> <?php echo $produk->berat . " gram";?></td></tr>
 									</tbody>
 								</table>
 

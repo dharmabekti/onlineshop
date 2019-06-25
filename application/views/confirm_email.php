@@ -29,24 +29,24 @@
 				<!-- Sidebar end=============================================== -->
 				<div class="span9">
 					<ul class="breadcrumb">
-						<li><a href="index.html">Home</a> <span class="divider">/</span></li>
-						<li><a href="index.html">Keranjang</a> <span class="divider">/</span></li>
+						<li><a href="<?php echo base_url(); ?>">Home</a> <span class="divider">/</span></li>
+						<li><a href="">Keranjang</a> <span class="divider">/</span></li>
 						<li class="active">Login</li>
 					</ul>
 					<div class="row">
-						<div class="span4 offset2">
+						<div class="span8">
 							<div class="well">
-								<h5>HARAP ISI BIODATA</h5><br/>
-								Gunakan No Handphone yang valid untuk pemberitahuan<br/><br/><br/>
-								<form action="<?php echo site_url('welcome/prosestransaksi');?>" method="post">
+								<h5>HARAP ISI BIODATA</h5>
+								Gunakan nomor handphone dan email yang valid untuk pemberitahuan<br/><br/>
+								<form action="<?php echo site_url('welcome/reviewtransaksi');?>" method="post">
 									<div class="control-group">
 										<label class="control-label" for="inputEmail0">Nama</label>
 										<div class="controls">
-											<input name="nama" class="span3"  type="name" id="inputEmail0" placeholder="Nama" required=""
+											<input name="nama" class="span7"  type="text" id="inputEmail0" placeholder="Nama" required=""
 											oninvalid="this.setCustomValidity('Silahkan Isi Nama')" oninput="setCustomValidity('')" >
 										</div>
 									</div>
-									<div class="control-group">
+									<div class="control-group span4">
 										<label class="control-label" for="inputEmail0">No. Handphone</label>
 										<div class="controls">
 											<input name="nope" class="span3"  type="number" id="inputEmail0" placeholder="No HP" required=""
@@ -62,11 +62,33 @@
 									</div>
 									<div class="control-group">
 										<label class="control-label" for="inputEmail0">Alamat Lengkap</label>
+										<span><i>Meliputi Gedung, Jalan, Desa/Kelurahan, Kabupaten/Kota, Provinsi, dan Kode Pos</i></span>
 										<div class="controls">
-											<textarea name="alamat" class="span3" required=""
+											<textarea name="alamat" class="span7" rows="3" required=""
 											oninvalid="this.setCustomValidity('Silahkan Isi Alamat Lengkap')" oninput="setCustomValidity('')" ></textarea>
 										</div>
 									</div>
+									<div class="control-group span4">
+										<label class="control-label" for="inputEmail0">Kota</label>
+										<div class="controls">
+											<select name="kota" class="span3">
+												<?php foreach($kota as $data): ?>
+													<option value="<?= $data->city_id; ?>"><?= $data->city_name; ?></option>
+												<?php endforeach; ?>
+											</select>
+										</div>
+									</div>
+									<div class="control-group">
+										<label class="control-label" for="inputEmail0">Kurir</label>
+										<div class="controls">
+											<select name="kurir" class="span3">
+												<option value="pos">Pos Indonesia</option>
+												<option value="jne">JNE</option>
+												<option value="tiki">TIKI</option>
+											</select>
+										</div>
+									</div>
+									<input type="hidden" name="berat" value="<?= $this->uri->segment('3')?>">
 									<div class="controls">
 										<button type="submit" class="btn block">Create Your Account</button>
 									</div>

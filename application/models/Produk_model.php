@@ -74,6 +74,8 @@ class Produk_model extends CI_Model
 			'nope' => $this->input->post('nope',true),
 			'email' => $this->input->post('email',true),
 			'alamat' => $this->input->post('alamat',true),
+			'kota_tujuan' => $this->input->post('kota',true),
+			'kurir' => $this->input->post('kurir',true),
 			);
 		$this->db->insert('invoices', $invoice);
 		$invoice_id = $this->db->insert_id();
@@ -91,9 +93,7 @@ class Produk_model extends CI_Model
 		}
 		
 		$this->cart->destroy();
-		
 		$this->load->view('order_success',$data);
-		
 		return TRUE;
 	}
 	

@@ -18,7 +18,7 @@
     <div class="content">
         <div class="container">
 
-         <div class="row">
+           <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -42,7 +42,7 @@
 
 
                                     <tbody>
-                                     <?php foreach ($konfirmasi as $konfirmasi): ?>
+                                       <?php foreach ($konfirmasi as $konfirmasi): ?>
                                         <tr>
                                             <td><?php echo $konfirmasi->invoice_id;?></td>
                                             <td><?php echo $konfirmasi->tanggal;?></td>
@@ -52,7 +52,9 @@
                                             <td><a target="_blank" href="<?php echo site_url('uploads/konfirmasi/'.$konfirmasi->gambar);?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-download"></i> Download</a></td>
                                             <td>
                                                 <a href="<?php echo site_url('admin/detailkonfirmasi/'.$konfirmasi->invoice_id);?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-search"></i> Detail</a>
-                                                <a href="<?php echo site_url('admin/verifikasibayar/'.$konfirmasi->invoice_id);?>" class="btn btn-success waves-effect waves-light btn-sm m-b-5"><i class="fa fa-check"></i> Verifikasi</a>
+                                                <?php if($konfirmasi->status != "PAID") { ?>
+                                                    <a href="<?php echo site_url('admin/verifikasibayar/'.$konfirmasi->invoice_id);?>" class="btn btn-success waves-effect waves-light btn-sm m-b-5"><i class="fa fa-check"></i> Verifikasi</a>
+                                                <?php }?>
                                             </td>
                                         </tr>
                                     <?php endforeach;?>

@@ -37,7 +37,8 @@
                                                 <th>Kategori</th>
                                                 <th>Produk</th>
                                                 <th>Ukuran</th>
-                                                <th>Harga</th>
+                                                <th>Berat</th>
+                                                <th>Harga (Rp)</th>
                                                 <th>Gambar</th>
                                                 <th>Aksi</th>
                                             </tr>
@@ -48,7 +49,8 @@
                                                 <td><?php echo $produk->nama_kategori;?></td>
                                                 <td><?php echo $produk->nama_produk;?></td>
                                                 <td><?php echo $produk->ukuran;?></td>
-                                                <td><?php echo $produk->harga;?></td>
+                                                <td><?php echo $produk->berat . " gram";?></td>
+                                                <td align="right"><?php echo number_format($produk->harga,0,',','.');?></td>
                                                 <td>
                                                     <?php 
                                                     $product_image = ['src'=>'uploads/' . $produk->gambar,

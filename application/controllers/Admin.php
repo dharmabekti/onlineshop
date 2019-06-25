@@ -53,6 +53,7 @@ class Admin extends CI_Controller
 			$data['kategori'] = $this->input->post('kategori',true);
 			$data['nama_produk'] = $this->input->post('nama_produk',true);
 			$data['ukuran'] = $this->input->post('ukuran',true);
+			$data['berat'] = $this->input->post('berat',true);
 			$data['keterangan'] = $this->input->post('keterangan',true);
 			$data['harga'] = $this->input->post('harga',true);
 			$data['gambar'] = $gambar['file_name'];
@@ -139,7 +140,8 @@ class Admin extends CI_Controller
 	{
 		$data['status'] = "PAID";
 		$this->produk_model->editinvoices($invoice_id, $data);
-		redirect('admin/konfirmasi');
+		// redirect('admin/konfirmasi','refresh');
+		$this->konfirmasi();
 	}
 	
 	// function logout()
