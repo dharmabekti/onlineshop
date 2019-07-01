@@ -4,7 +4,7 @@
     <div class="sidebar-inner slimscrollleft">
         <div class="user-details">
             <div class="pull-left">
-                <img src="<?php echo base_url('assets/blue/images/users/avatar-1.jpg');?>" alt="" class="thumb-md img-circle">
+                <img src="<?php echo base_url('assets/blue/images/users/avatar-1.png');?>" alt="" class="thumb-md img-circle">
             </div>
             <div class="user-info">
                 <div class="dropdown">

@@ -9,6 +9,7 @@ class Admin extends CI_Controller
 		parent::__construct();
 		$this->load->model('produk_model');
 		$this->load->model('rekening_model');
+		$this->load->model('user_model');
 		$this->load->helper('download');
 		$this->session_data = $this->session->userdata('logged_in_pengelola');
 
@@ -231,11 +232,96 @@ class Admin extends CI_Controller
 	}
 
 	public function hapusrekening($id=null)
-    {
-        if (!isset($id)) show_404();
+	{
+		if (!isset($id)) show_404();
 
-        if ($this->rekening_model->hapusRekening($id)) {
-            redirect('admin/rekening', 'refresh');
-        }
-    }
+		if ($this->rekening_model->hapusRekening($id)) {
+			redirect('admin/rekening', 'refresh');
+		}
+	}
+
+	public function profil()
+	{
+		$profil = $this->user_model->getPenggunaById($this->session_data['id']);
+		// print_r($profil->id); die();
+		$data['profil'] = $profil;
+		// print_r($this->session_data['id']); die();
+
+		if ($_SERVER ['REQUEST_METHOD']=="POST") 
+		{
+			$this->form_validation->set_rules('nama', 'Nama', 'trim|required');
+			$this->form_validation->set_rules('username', 'Username', 'trim|required');
+			$this->form_validation->set_rules('email', 'Email', 'trim|required');
+			$this->form_validation->set_rules('kontak', 'Kontak', 'trim|required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				echo '<script language="javascript">alert("Silahkan lengkapi pengisian")</script>';
+				redirect('admin/profil','refresh');
+			}
+			else
+			{
+				$id_data['id'] = $profil->id;
+				$in_data['nama'] = $this->input->post('nama');
+				$in_data['username'] = $this->input->post('username');
+				$in_data['email'] = $this->input->post('email');
+				$in_data['kontak'] = $this->input->post('kontak');
+				$in_data['instagram'] = $this->input->post('instagram');
+				$in_data['facebook'] = $this->input->post('facebook');
+				$in_data['twitter'] = $this->input->post('twitter');
+
+				$this->user_model->ubahPengguna($in_data, $id_data);
+				echo '<script language="javascript">alert("Pengguna telah diubah !")</script>';
+				redirect('admin/profil','refresh');
+			}
+
+		}
+		else {
+			$this->load->view('admin/profil', $data);
+		}
+	}
+
+	public function ubahpassword()
+	{
+		$old_pass = $this->session_data['password'];
+
+		if ($_SERVER ['REQUEST_METHOD']=="POST") 
+		{
+			$this->form_validation->set_rules('old_password', 'Password Lama', 'trim|required');
+			$this->form_validation->set_rules('new_password', 'Password Baru', 'trim|required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				echo '<script language="javascript">alert("Password Tidak Boleh Kosong")</script>';
+				redirect('admin/ubahpassword', 'refresh');
+			}
+			else
+			{
+				if($old_pass == MD5($this->input->post('old_password')))
+				{
+					if($this->input->post('new_password') == $this->input->post('konfirm_new_password')){
+						$id_data['id'] = $this->session_data['id'];
+						$in_data['password'] = MD5($this->input->post('new_password'));
+
+						$this->user_model->ubahPengguna($in_data, $id_data);
+						echo '<script language="javascript">alert("Password Telah Diganti. Silahkan login kembali!")</script>';
+						redirect('logout', 'refresh');
+					}
+					else
+					{
+						echo '<script language="javascript">alert("Konfirmasi Password lama tidak sesuai")</script>';
+					}
+				}
+				else
+				{
+					echo '<script language="javascript">alert("Password lama tidak sesuai")</script>';
+				}
+
+				redirect('admin/ubahpassword', 'refresh');
+			}
+		}
+		else {
+			$this->load->view('admin/ubah_password');
+		}
+	}
 }

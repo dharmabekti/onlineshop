@@ -63,10 +63,11 @@
 
             <ul class="nav navbar-nav navbar-right pull-right">
               <li class="dropdown">
-                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="<?php echo base_url('assets/blue/images/users/avatar-1.jpg');?>" alt="user-img" class="img-circle"> </a>
+                <a href="" class="dropdown-toggle profile" data-toggle="dropdown" aria-expanded="true"><img src="<?php echo base_url('assets/blue/images/users/avatar-1.png');?>" alt="user-img" class="img-circle"> </a>
                 <ul class="dropdown-menu">
-                  <li><a href="javascript:void(0)"><i class="md md-face-unlock"></i> Profil</a></li>
+                  <li><a href="<?= base_url('admin/profil');?>"><i class="md md-face-unlock"></i> Profil</a></li>
                   <li><a href="<?= base_url('admin/rekening');?>"><i class="md md-payment"></i> Rekening</a></li>
+                  <li><a href="<?= base_url('admin/ubahpassword');?>"><i class="md md-lock"></i> Ubah Password</a></li>
                   <li><a href="<?= base_url('logout');?>"><i class="md md-settings-power"></i> Logout</a></li>
                 </ul>
               </li>
