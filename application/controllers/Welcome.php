@@ -219,4 +219,9 @@ class Welcome extends CI_Controller {
 		$data['produk'] = $this->produk_model->cariproduk($kategori,$str);
 		$this->load->view('welcome_message',$data);
 	}
+
+	function metodepembayaran()
+	{
+		$this->load->view('metode_pembayaran');
+	}
 }

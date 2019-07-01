@@ -6,11 +6,7 @@
 		<?php foreach ($kategori as $data): ?>
 			<li><a href="<?php echo site_url('welcome/kategori/' . $data->id_kategori . '/' . $data->nama_kategori);?>"><?= $data->nama_kategori ?></a></li>
 		<?php endforeach; ?>
-		<!-- <li><a href="<?php echo site_url('welcome/kategori/Camera');?>">CAMERA</a></li>
-		<li><a href="<?php echo site_url('welcome/kategori/Handphone');?>">HANDPHONE</a></li>
-		<li><a href="<?php echo site_url('welcome/kategori/Notebook');?>">Notebook</a></li>
-		<li><a href="<?php echo site_url('welcome/kategori/Netbook');?>">Netbook</a></li>
-		<li><a href="<?php echo site_url('welcome/kategori/PC');?>">Computer Desktop</a></li> -->
+		<li><a href="<?php echo site_url('welcome/metodepembayaran');?>">Metode Pembayaran</a></li>
 	</ul>
 	<br/>
 
