@@ -17,69 +17,53 @@
     <!-- Start content -->
     <div class="content">
         <div class="container">
-           <div class="col-md-12">
-            <div class="panel panel-default">
-                <div class="panel-heading"><h3 class="panel-title">Ubah Produk</h3></div>
-                <div class="panel-body">
-                  <?php echo form_open_multipart('admin/proseseditproduk',['class'=>'form-horizontal','role'=>'form']);?>
-                  <div class="form-group">
-                    <label class="col-sm-3 control-label">Kategori</label>
-                    <div class="col-sm-9">
-                      <select name="kategori" class="select2" data-placeholder="Pilih Produk ... ">
-                          <?php foreach ($kategori as $data): ?>
-                            <option value="<?= $data->id_kategori ?>"
-                                <?php if($data->id_kategori == $produk->kategori) echo "selected"; ?>><?= $data->nama_kategori ?></option>
-                            <?php endforeach; ?>
-                        </select>
+
+           <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-default">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">Daftar Rekening</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <a href="<?= base_url('admin/tambahrekening'); ?>" class="btn btn-primary waves-effect waves-light btn-sm m-b-5">
+                                <i class="fa fa-plus"></i> Tambah Rekening</a>
+                                <div class="col-md-12 col-sm-12 col-xs-12">
+                                    <table id="datatable" class="table table-striped table-bordered">
+                                        <thead>
+                                            <tr>
+                                                <th>Nama Bank</th>
+                                                <th>No. Rekening</th>
+                                                <th>Atasnama</th>
+                                                <th>Aksi</th>
+                                            </tr>
+                                        </thead>
+
+
+                                        <tbody>
+                                           <?php foreach ($rekening as $data): ?>
+                                            <tr>
+                                                <td><?php echo $data->nama_bank;?></td>
+                                                <td><?php echo $data->no_rekening;?></td>
+                                                <td><?php echo $data->atasnama;?></td>
+                                                <td>
+                                                    <a href="<?php echo site_url('admin/ubahrekening/'.$data->id);?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-edit"></i> Ubah</a>
+                                                    <a href="<?php echo site_url('admin/hapusrekening/'.$data->id);?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-trash"></i> Hapus</a>
+                                                </td>
+                                            </tr>
+                                        <?php endforeach;?>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
                     </div>
                 </div>
-                <div class="form-group">
-                    <label class="col-sm-3 control-label">Brand</label>
-                    <div class="col-sm-9">
-                      <input type="text" name="nama_produk" value="<?php echo $produk->nama_produk;?>" class="form-control" placeholder="Brand">
-                  </div>
-              </div>
-              <div class="form-group">
-                <label class="col-sm-3 control-label">Model</label>
-                <div class="col-sm-9">
-                  <input type="text" name="ukuran" value="<?php echo $produk->ukuran;?>" class="form-control" placeholder="Model">
-              </div>
-          </div>
-          
-          <div class="form-group">
-            <label class="col-sm-3 control-label">Harga</label>
-            <div class="col-sm-9">
-              <input type="text" name="harga" value="<?php echo $produk->harga;?>" class="form-control" placeholder="Harga, Mis : 750000">
-          </div>
-      </div>
-      <div class="form-group">
-        <label class="col-sm-3 control-label">Gambar</label>
-        <div class="col-sm-9">
-          <input type="file" class="form-control" name="userfile" />
-      </div>
-  </div>
-  <div class="row">
-    <div class="col-sm-12">
-        <div class="panel panel-default">
-            <div class="panel-heading"><h3 class="panel-title">Masukkan keterangan produk</h3></div>
-            <div class="panel-body">
-                <textarea name="keterangan" class="wysihtml5 form-control" rows="9"><?php echo $produk->keterangan;?></textarea>
             </div>
-        </div>
-    </div>
-</div> <!-- End row -->
 
-<input type="hidden" name="id" value="<?php echo $produk->id;?>">
-<div class="form-group m-b-0">
-    <div class="col-sm-offset-3 col-sm-9">
-      <button type="submit" class="btn btn-info waves-effect waves-light">Edit</button>
-  </div>
-</div>
-<?php echo form_close();?>
-</div> <!-- panel-body -->
-</div> <!-- panel -->
-</div> <!-- col -->
-</div>
+        </div> <!-- End Row -->
+
+    </div>
 </div>
 </div>
 <!-- ============================================================== -->
@@ -222,30 +206,15 @@
 <!-- CUSTOM JS -->
 <script src="<?php echo base_url('assets/blue/js/jquery.app.js');?>"></script>
 
-<script type="text/javascript" src="<?php echo base_url('assets/blue/assets/bootstrap-wysihtml5/wysihtml5-0.3.0.js');?>"></script>
-<script type="text/javascript" src="<?php echo base_url('assets/blue/assets/bootstrap-wysihtml5/bootstrap-wysihtml5.js');?>"></script>
+<script src="<?php echo base_url('assets/blue/assets/datatables/jquery.dataTables.min.js');?>"></script>
+<script src="<?php echo base_url('assets/blue/assets/datatables/dataTables.bootstrap.js');?>"></script>
 
-<!--form validation init-->
-<script src="<?php echo base_url('assets/blue/assets/summernote/summernote.min.js');?>"></script>
 
-<script>
-
-    jQuery(document).ready(function(){
-        $('.wysihtml5').wysihtml5();
-
-        $('.summernote').summernote({
-                    height: 200,                 // set editor height
-
-                    minHeight: null,             // set minimum height of editor
-                    maxHeight: null,             // set maximum height of editor
-
-                    focus: true                 // set focus to editable area after initializing summernote
-                });
-
-    });
+<script type="text/javascript">
+    $(document).ready(function() {
+        $('#datatable').dataTable();
+    } );
 </script>
-
-
 
 
 </body>

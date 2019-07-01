@@ -19,7 +19,7 @@
         <div class="container">
             <div class="col-md-12">
                 <div class="panel panel-default">
-                    <div class="panel-heading"><h3 class="panel-title">Horizontal form</h3></div>
+                    <div class="panel-heading"><h3 class="panel-title">Tambah Produk</h3></div>
                     <div class="panel-body">
                       <?php echo form_open_multipart('admin/proses_tambah_produk',['class'=>'form-horizontal','role'=>'form']);?>
                       <div class="form-group">

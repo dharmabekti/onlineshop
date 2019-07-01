@@ -8,6 +8,7 @@ class Admin extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('produk_model');
+		$this->load->model('rekening_model');
 		$this->load->helper('download');
 		$this->session_data = $this->session->userdata('logged_in_pengelola');
 
@@ -156,4 +157,85 @@ class Admin extends CI_Controller
 		$data = file_get_contents('uploads/konfirmasi/'.$nama);
 		force_download($name, $data);
 	}
+
+	function rekening()
+	{
+		$data['rekening'] = $this->rekening_model->listRekening();
+		$this->load->view('admin/daftarrekening',$data);
+	}
+
+	function tambahrekening()
+	{
+		if ($_SERVER ['REQUEST_METHOD']=="POST") 
+		{
+			$this->form_validation->set_rules('bank', 'Bank', 'trim|required');
+			$this->form_validation->set_rules('norek', 'Norek', 'trim|required');
+			$this->form_validation->set_rules('atasnama', 'Atasnama', 'trim|required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				echo '<script language="javascript">alert("Silahkan lengkapi pengisian")</script>';
+				redirect('admin/tambahrekening','refresh');
+			}
+			else
+			{
+				$data = array(
+					'nama_bank' => $this->input->post('bank'),
+					'no_rekening' => $this->input->post('norek'),
+					'atasnama' => $this->input->post('atasnama'),
+				);
+
+				$this->rekening_model->input_data($data);
+				echo '<script language="javascript">alert("Rekening ditambahkan !")</script>';
+				redirect('admin/rekening','refresh');
+			}
+
+		}
+		else 
+		{
+			$this->load->view('admin/tambah_rekening');
+		}
+	}
+
+	public function ubahrekening($idrekening)
+	{
+		$data['rekening'] = $this->rekening_model->getRekeningById($idrekening);
+
+		if ($_SERVER ['REQUEST_METHOD']=="POST") 
+		{
+			$this->form_validation->set_rules('bank', 'Bank', 'trim|required');
+			$this->form_validation->set_rules('norek', 'Norek', 'trim|required');
+			$this->form_validation->set_rules('atasnama', 'Atasnama', 'trim|required');
+
+			if ($this->form_validation->run() == FALSE)
+			{
+				echo '<script language="javascript">alert("Silahkan lengkapi pengisian")</script>';
+				redirect('admin/ubahrekening','refresh');
+			}
+			else
+			{
+				$id_data['id'] = $idrekening;
+				$in_data['nama_bank'] = $this->input->post('bank');
+				$in_data['no_rekening'] = $this->input->post('norek');
+				$in_data['atasnama'] = $this->input->post('atasnama');
+
+				$this->rekening_model->ubahRekening($in_data, $id_data);
+				echo '<script language="javascript">alert("Rekening telah diubah !")</script>';
+				redirect('admin/rekening','refresh');
+			}
+
+		}
+		else {
+			$this->load->view('admin/ubah_rekening', $data);
+		}
+	}
+
+	public function hapusrekening($id=null)
+    {
+        if (!isset($id)) show_404();
+
+        if ($this->rekening_model->hapusRekening($id)) {
+            redirect('admin/rekening', 'refresh');
+        }
+    }
 }
