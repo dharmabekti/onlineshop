@@ -139,9 +139,22 @@ class Welcome extends CI_Controller {
 		if ($err) {
 			echo "cURL Error #:" . $err;
 		} else {
+			$pemesan = array(
+				'nama' => $this->input->post('nama',true),
+				'nope' => $this->input->post('nope',true),
+				'email' => $this->input->post('email',true),
+				'alamat' => $this->input->post('alamat',true),
+				'kota' => $this->input->post('kota',true),
+				'kurir' => $this->input->post('kurir',true),
+				'berat' => $this->input->post('berat',true),
+			);
+
 			$json = json_decode($response);
-			$data['cost'] = $json->rajaongkir->results;
-			echo $json->rajaongkir->results;
+			$data['pemesan'] = $pemesan;
+			$data['cost'] = $json->rajaongkir->results[0]->costs;
+			// var_dump($json->rajaongkir->results[0]->costs);
+
+			$this->load->view('review_email',$data);
 		}
 
 		// $data['pemesan'] = array(

@@ -18,7 +18,7 @@
     <div class="content">
         <div class="container">
 
-         <div class="row">
+           <div class="row">
             <div class="col-md-12">
                 <div class="panel panel-default">
                     <div class="panel-heading">
@@ -67,13 +67,13 @@
 
                                     
                                     <tbody>
-                                     <?php 
-                                     $total = 0;
-                                     foreach ($konfirmasi as $konfirmasi): 
-                                         $subtotal = $konfirmasi->qty * $konfirmasi->price;
-                                         $total += $subtotal;
-                                         ?>
-                                         <tr>
+                                       <?php 
+                                       $total = 0;
+                                       foreach ($konfirmasi as $konfirmasi): 
+                                           $subtotal = $konfirmasi->qty * $konfirmasi->price;
+                                           $total += $subtotal;
+                                           ?>
+                                           <tr>
                                             <td><?php echo $konfirmasi->invoice_id;?></td>
                                             <td><?php echo $konfirmasi->product_id;?></td>
                                             <td><?php echo $konfirmasi->product_name;?></td>
@@ -85,17 +85,29 @@
                                 </tbody>
                                 <tfoot>
                                   <tr>
-                                   <td colspan="5" align="right">Total</td>
-                                   <td><h3><?php echo number_format($total,0,',','.');?></h3></td>
-                               </tr>
-                           </tfoot>
-                       </table>
-                       <a href="<?php echo site_url('admin/konfirmasi');?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-arrow-left"></i> Kembali</a>
-                   </div>
-               </div>
-           </div>
-       </div>
-   </div>
+                                     <td colspan="4" align="right">Total Belanja</td>
+                                     <td><h5><?php echo number_format($total,0,',','.');?></h5></td>
+                                 </tr>
+                                 <tr>
+                                  <td colspan="4" align="right">Ongkos Kirim</td>
+                                  <td><h5><?php echo number_format($konfirmasi->total_bayar-$total,0,',','.');?></h5></td>
+                              </tr>
+                              <tr>
+                                 <td colspan="4" align="right">Total yg Harus Dibayar</td>
+                                 <td><h3><?php echo number_format($konfirmasi->total_bayar,0,',','.');?></h3></td>
+                             </tr>
+                         </tfoot>
+                     </table>
+                     <a href="<?php echo site_url('admin/konfirmasi');?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-arrow-left"></i> Kembali</a>
+                     <a target="_blank" href="<?php echo site_url('uploads/konfirmasi/'.$konfirmasi->gambar);?>" class="btn btn-default waves-effect waves-light btn-sm m-b-5"><i class="fa fa-download"></i> Bukti Transfer</a>
+                     <?php if($konfirmasi->status != "PAID") { ?>
+                        <a href="<?php echo site_url('admin/verifikasibayar/'.$konfirmasi->invoice_id);?>" class="btn btn-success waves-effect waves-light btn-sm m-b-5"><i class="fa fa-check"></i> Verifikasi</a>
+                    <?php }?>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
 
 </div> <!-- End Row -->
 

@@ -40,7 +40,7 @@
 									<button type="button" class="close" data-dismiss="alert">×</button>
 									<strong>Pemesanan Sukses</strong> 
 									<h2>Kode Pesanan anda adalah : <?php echo $invoice_id;?></h2>
-									Simpan kode tersebut karena akan digunakan ketika melakukan konfirmasi pembayaran!! Terima kasih telah berbelanja di Kami
+									Simpan kode tersebut karena akan digunakan ketika melakukan konfirmasi pembayaran!! Detail pemesanan telah dikirimkan via email. Terima kasih telah berbelanja di Kami
 								</div>	
 							</div>
 						</div>

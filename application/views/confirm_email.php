@@ -90,7 +90,7 @@
 									</div>
 									<input type="hidden" name="berat" value="<?= $this->uri->segment('3')?>">
 									<div class="controls">
-										<button type="submit" class="btn block">Create Your Account</button>
+										<button type="submit" class="btn block">Pesan</button>
 									</div>
 								</form>
 							</div>
