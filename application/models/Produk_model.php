@@ -97,7 +97,7 @@ class Produk_model extends CI_Model
 				);
 				$this->db->insert('orders',$data);
 			}
-			
+			$this->sendEmailPemesanan($invoice_id);
 			$this->cart->destroy();
 			$this->load->view('order_success',$data);
 			return TRUE;
@@ -161,5 +161,43 @@ class Produk_model extends CI_Model
 		$this->db->or_like('brand',$str);
 		$this->db->where('kategori',$kategori);
 		return $this->db->get($this->_table)->result();
+	}
+
+	private function sendEmailPemesanan($id_invoices)
+	{		
+		$this->load->model('rekening_model');
+		$pemesanan = $this->detailinvoices($id_invoices);
+		$data['invoices'] = $pemesanan;
+		$data['rekening'] = $this->rekening_model->listRekening();
+
+		$config = Array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'dharma.bekti16696@gmail.com',
+			'smtp_pass' => '16696-raava',
+			'mailtype' => 'html',
+			'wordwrap' => TRUE,
+			'charset' => 'iso-8859-1',
+			'newline' => "\r\n"
+		);
+		
+		$body = $this->load->view('v_emailpemesanan',$data,TRUE);
+     // $this->load->library('email');
+		$this->email->initialize($config);
+		$this->email->set_newline("\r\n");
+		$this->email->from('no-reply@mail.com', 'Konfirmasi Pemesanan');
+		$this->email->to($pemesanan[0]->email);
+		$this->email->subject('OnlineShop');
+		$this->email->message($body);
+		if (!$this->email->send())
+		{
+			show_error($this->email->print_debugger());
+			return false;
+		}
+		else
+		{
+			return true;
+		}
 	}
 }

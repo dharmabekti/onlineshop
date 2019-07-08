@@ -141,16 +141,10 @@ class Admin extends CI_Controller
 	function verifikasibayar($invoice_id)
 	{
 		$data['status'] = "PAID";
-		$this->produk_model->editinvoices($invoice_id, $data);
-		// redirect('admin/konfirmasi','refresh');
+		$this->produk_model->editinvoices($invoice_id, $data);		
+		$this->sendEmailKonfirmasiBayar($invoice_id);
 		$this->konfirmasi();
 	}
-	
-	// function logout()
-	// {
-	// 	$this->session->sess_destroy();
-	// 	redirect(base_url());
-	// }
 	
 	function download($nama)
 	{
@@ -322,6 +316,41 @@ class Admin extends CI_Controller
 		}
 		else {
 			$this->load->view('admin/ubah_password');
+		}
+	}
+
+	private function sendEmailKonfirmasiBayar($id_invoices)
+	{		
+		$pemesanan = $this->produk_model->detailinvoices($id_invoices);
+		$data['invoices'] = $pemesanan;
+		$config = Array(
+			'protocol' => 'smtp',
+			'smtp_host' => 'ssl://smtp.googlemail.com',
+			'smtp_port' => 465,
+			'smtp_user' => 'dharma.bekti16696@gmail.com',
+			'smtp_pass' => '16696-raava',
+			'mailtype' => 'html',
+			'wordwrap' => TRUE,
+			'charset' => 'iso-8859-1',
+			'newline' => "\r\n"
+		);
+		
+		$body = $this->load->view('v_emailkonfirmasibayar',$data,TRUE);
+     // $this->load->library('email');
+		$this->email->initialize($config);
+		$this->email->set_newline("\r\n");
+		$this->email->from('no-reply@mail.com', 'Pesanan Diproses');
+		$this->email->to($pemesanan[0]->email);
+		$this->email->subject('OnlineShop');
+		$this->email->message($body);
+		if (!$this->email->send())
+		{
+			show_error($this->email->print_debugger());
+			return false;
+		}
+		else
+		{
+			return true;
 		}
 	}
 }

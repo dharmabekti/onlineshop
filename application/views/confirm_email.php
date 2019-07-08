@@ -73,7 +73,7 @@
 										<div class="controls">
 											<select name="kota" class="span3">
 												<?php foreach($kota as $data): ?>
-													<option value="<?= $data->city_id; ?>"><?= $data->city_name; ?></option>
+													<option value="<?= $data->city_id; ?>"><?= $data->city_name . ' - ' . $data->province ?></option>
 												<?php endforeach; ?>
 											</select>
 										</div>
